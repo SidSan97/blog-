@@ -72,7 +72,8 @@
 
       <!-- tweetbox starts -->
       <div class="tweetBox">
-        <form  method="POST" enctype="multipart/form-data" >
+        <form action="/postar"  method="POST" enctype="multipart/form-data" >
+            @csrf
             <div class="tweetbox__input">
                 <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt=""/>
 
