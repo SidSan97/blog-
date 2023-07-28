@@ -13,8 +13,9 @@ class PostController extends Controller
     {
         $post = new Post();
 
-        $post->texto  = $request->input('texto');
-        $post->autor  = "Sidnei Santiago";
+        $post->texto    = $request->input('texto');
+        $post->autor    = $request->input('autor');
+        $post->id_autor = $request->input('id_autor');
 
         if($request->hasFile('imagem') and $request->file('imagem')->isValid())
         {

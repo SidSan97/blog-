@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('texto', 700);
             $table->string('imagem')->nullable();
             $table->string('autor', 100);
+            $table->integer('id_autor');
             $table->timestamps();
         });
     }
