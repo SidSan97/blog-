@@ -81,7 +81,8 @@
             <div class="tweetbox__input">
                 <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt=""/>
 
-                <input type="text" placeholder="No que você está pensando?" name="texto" required/>
+                <!input type="text" placeholder="No que você está pensando?" name="texto" required/>
+                <textarea name="texto" id="textArea" placeholder="No que você está pensando?" required> </textarea>
             </div>
 
             <input type="hidden" name="autor" id="" value="<?php echo Auth::user()->name; ?>">
@@ -93,8 +94,8 @@
       <!-- tweetbox ends -->
 
       <!-- post starts -->
-      <div class="post">
       @foreach($posts as $postagem)
+      <div class="post">
         <div class="post__avatar">
           <img
             src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
@@ -106,28 +107,25 @@
           <div class="post__header">
             <div class="post__headerText">
               <h3>
-                {{ $postagem->autor }}
-                <span class="post__headerSpecial"
-                  ><span class="material-icons post__badge"> verified </span>@somanathg</span
-                >
+                {{ $postagem->autor }}             
               </h3>
+              <span>Postado em: {{ $postagem->created_at }}</span> <br><br>
             </div>
             <div class="post__headerDescription">
               <p>{{ $postagem->texto }}</p>
             </div>
           </div>
-          <img
-            src="/img/posts/{{$postagem->imagem}}"
-            alt=""
-          />
+
+          <img src="/img/posts/{{$postagem->imagem}}" alt=""/>
+
           <div class="post__footer">
             <span class="material-icons"> repeat </span>
             <span class="material-icons"> favorite_border </span>
             <span class="material-icons"> publish </span>
           </div>
         </div>
-        @endforeach
       </div>
+      @endforeach
       <!-- post ends -->
 
       <!-- post starts -->
@@ -198,5 +196,7 @@
       </div>
     </div>
     <!-- widgets ends -->
+    
+    <script src="js/script.js"></script>
   </body>
 </html>

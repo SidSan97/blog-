@@ -135,7 +135,23 @@
     outline: none;
   }
 
+  .tweetbox__input textarea {
+    flex: 1;
+    margin-left: 20px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    resize: none;
+    width: 480px;
+    height: auto;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    background-color: #eaeaea;
+    border-radius: 5px;
+  }
+
   .tweetBox__tweetButton {
+    cursor: pointer;
     background-color: var(--twitter-color);
     border: none;
     color: white;
@@ -196,6 +212,7 @@
   }
 
   .post__body {
+    max-width: 500px;
     flex: 1;
     padding: 10px;
   }
