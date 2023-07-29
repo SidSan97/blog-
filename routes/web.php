@@ -20,9 +20,12 @@ Route::get('/', function () {
 
 Route::post('/postar', [PostController::class, 'postar']);
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', [PostController::class, 'pegarPostagem']);
+
+/*Route::get('/home', function () {
+    $nome = 'sadsd';
+    return view('home', ['nomee'=>$nome]);
+});*/
 
 Route::middleware([
     'auth:sanctum',

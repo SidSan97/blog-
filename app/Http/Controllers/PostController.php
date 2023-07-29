@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Routing\Route;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent;
+ 
 class PostController extends Controller
 {
 
@@ -35,5 +37,12 @@ class PostController extends Controller
         }
         else
             die('n foi');
+    }
+
+    public function pegarPostagem()
+    {
+        $post = Post::all();
+
+        return view('home', ['posts'=>$post]);
     }
 }
