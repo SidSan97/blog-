@@ -18,14 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('home', [PostController::class, 'pegarPostagem'])->name('home');;
+
 Route::post('/postar', [PostController::class, 'postar']);
 
-Route::get('/home', [PostController::class, 'pegarPostagem']);
+Route::delete('/excluir/{id}', [PostController::class, 'excluirPostagem']);
 
-/*Route::get('/home', function () {
-    $nome = 'sadsd';
-    return view('home', ['nomee'=>$nome]);
-});*/
+Route::get('/editar/{id}', [PostController::class, 'editarPostagem']);
+
+
 
 Route::middleware([
     'auth:sanctum',

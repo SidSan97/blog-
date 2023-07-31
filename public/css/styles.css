@@ -144,7 +144,7 @@
     resize: none;
     width: 480px;
     height: auto;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     overflow-wrap: break-word;
     background-color: #eaeaea;
     border-radius: 5px;
@@ -162,6 +162,12 @@
     height: 40px;
     margin-top: 20px;
     margin-left: auto;
+  }
+
+  .button-form
+  {
+    display: flex;
+    align-items: baseline;
   }
 
   /* post */
@@ -195,20 +201,50 @@
     margin-right: 5px;
   }
 
+  .post_header1
+  {
+    display: flex;
+    align-items: baseline;
+  }
+
   .post__headerSpecial {
     font-weight: 600;
     font-size: 12px;
     color: gray;
   }
 
+  .post__headerText
+  {
+    width: 90%;
+  }
+
   .post__headerText h3 {
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: 17px;
+  }
+
+  .dataPost
+  {
+    font-size: 13px;
+    color: #605e5b;
+  }
+
+  .divMoreOptions {
+    align-items: center;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
   }
 
   .post__headerDescription {
     margin-bottom: 10px;
     font-size: 15px;
+  }
+
+  .post__headerDescription p
+  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
   }
 
   .post__body {
@@ -256,6 +292,11 @@
   .widgets__widgetContainer h2 {
     font-size: 18px;
     font-weight: 800;
+  }
+
+  #areaEdicao
+  {
+    height: 250px !important;
   }
 
   @media (max-width: 1195px)

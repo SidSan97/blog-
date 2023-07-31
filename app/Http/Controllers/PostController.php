@@ -7,7 +7,7 @@ use App\Models\Post;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
- 
+
 class PostController extends Controller
 {
 
@@ -36,7 +36,7 @@ class PostController extends Controller
             return redirect('/home');
         }
         else
-            die('n foi');
+            dd('n foi');
     }
 
     public function pegarPostagem()
@@ -44,5 +44,26 @@ class PostController extends Controller
         $post = Post::all();
 
         return view('home', ['posts'=>$post]);
+    }
+
+    public function editarPostagem(Request $request)
+    {
+        $post = Post::findOrFail($request->id);
+        $post->texto = $request->input('texto');
+
+        if($post->save()) {
+            return redirect('home');
+        }
+
+    }
+
+    public function excluirPostagem($id)
+    {
+        $post = Post::findOrFail($id);
+
+        if($post->delete()) {
+            return redirect('home');
+        }
+
     }
 }

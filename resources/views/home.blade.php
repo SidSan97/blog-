@@ -13,12 +13,17 @@
 
     <link rel="stylesheet" href="css/styles.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -76,19 +81,21 @@
 
       <!-- tweetbox starts -->
       <div class="tweetBox">
-        <form action="/postar"  method="POST" enctype="multipart/form-data" >
+        <form action="/postar" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="tweetbox__input">
                 <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt=""/>
 
-                <!input type="text" placeholder="No que você está pensando?" name="texto" required/>
-                <textarea name="texto" id="textArea" placeholder="No que você está pensando?" required> </textarea>
+                <textarea name="texto" class="form-control" id="textArea" placeholder="No que você está pensando?" required> </textarea>
             </div>
 
             <input type="hidden" name="autor" id="" value="<?php echo Auth::user()->name; ?>">
             <input type="hidden" name="id_autor" id="" value="<?php echo Auth::id(); ?>">
-            <input type="file" placeholder="imagem" name="imagem">
-            <button type="submit" name="postar" class="tweetBox__tweetButton">Postar</button>
+
+            <div class="button-form">
+                <input type="file" placeholder="imagem" name="imagem">
+                <button type="submit" name="postar" class="tweetBox__tweetButton">Postar</button>
+            </div>
         </form>
       </div>
       <!-- tweetbox ends -->
@@ -105,12 +112,60 @@
 
         <div class="post__body">
           <div class="post__header">
-            <div class="post__headerText">
-              <h3>
-                {{ $postagem->autor }}             
-              </h3>
-              <span>Postado em: {{ $postagem->created_at }}</span> <br><br>
+            <div class="post_header1">
+                <div class="post__headerText">
+                    <h3> {{ $postagem->autor }} </h3>
+
+                    <span class="dataPost">Postado em: {{ $postagem->created_at }}</span> <br><br>
+                </div>
+
+                <div class="divMoreOptions" data-bs-toggle="modal" href="#modalExclusao{{$postagem->id}}">
+                    <img src="img/more-information.png" alt="Mais Informações" width="16px" height="16px" srcset="">
+                </div>
+
+                <!-- Modal exclusao-->
+                <div class="modal fade" id="modalExclusao{{$postagem->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Opções</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <li><span class="btn btn-primary" data-bs-target="#modalEdicao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Editar</span></li>
+                                    <li><a href="excluir/{{$postagem->id}}">Excluir</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal edição-->
+                <div class="modal fade" id="modalEdicao{{$postagem->id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel2">Editar Publicação</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="/editar/{{$postagem->id}}" method="GET">
+                                    <textarea class="form-control" name="texto" id="areaEdicao">
+                                        {{$postagem->texto}}
+                                    </textarea>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="post__headerDescription">
               <p>{{ $postagem->texto }}</p>
             </div>
@@ -126,42 +181,6 @@
         </div>
       </div>
       @endforeach
-      <!-- post ends -->
-
-      <!-- post starts -->
-      <div class="post">
-        <div class="post__avatar">
-          <img
-            src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-            alt=""
-          />
-        </div>
-
-        <div class="post__body">
-          <div class="post__header">
-            <div class="post__headerText">
-              <h3>
-                Somanath Goudar
-                <span class="post__headerSpecial"
-                  ><span class="material-icons post__badge"> verified </span>@somanathg</span
-                >
-              </h3>
-            </div>
-            <div class="post__headerDescription">
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-          </div>
-          <img
-            src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
-            alt=""
-          />
-          <div class="post__footer">
-            <span class="material-icons"> repeat </span>
-            <span class="material-icons"> favorite_border </span>
-            <span class="material-icons"> publish </span>
-          </div>
-        </div>
-      </div>
       <!-- post ends -->
     </div>
     <!-- feed ends -->
@@ -196,7 +215,9 @@
       </div>
     </div>
     <!-- widgets ends -->
-    
+
     <script src="js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
