@@ -294,6 +294,24 @@
     font-weight: 800;
   }
 
+  .lista-opcoes li
+  {
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid;
+    border-color: #c2c5c5;
+    height: 35px;
+    cursor: pointer;
+  }
+
+  .lista-opcoes li:first-child
+  {
+    border-top: 1px solid;
+    border-color: #c2c5c5;
+  }
+
   #areaEdicao
   {
     height: 250px !important;

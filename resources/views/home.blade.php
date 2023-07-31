@@ -119,23 +119,44 @@
                     <span class="dataPost">Postado em: {{ $postagem->created_at }}</span> <br><br>
                 </div>
 
-                <div class="divMoreOptions" data-bs-toggle="modal" href="#modalExclusao{{$postagem->id}}">
+                <div class="divMoreOptions" data-bs-toggle="modal" href="#modalOpcoes{{$postagem->id}}">
                     <img src="img/more-information.png" alt="Mais Informações" width="16px" height="16px" srcset="">
                 </div>
 
-                <!-- Modal exclusao-->
-                <div class="modal fade" id="modalExclusao{{$postagem->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal opçoes-->
+                <div class="modal fade" id="modalOpcoes{{$postagem->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Opções</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+
                             <div class="modal-body">
-                                <ul>
-                                    <li><span class="btn btn-primary" data-bs-target="#modalEdicao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Editar</span></li>
-                                    <li><a href="excluir/{{$postagem->id}}">Excluir</a></li>
+                                <ul class="lista-opcoes" style="padding-left: 0px;">
+                                    <li><span data-bs-target="#modalEdicao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Editar</span></li>
+                                    <li><span data-bs-target="#modalExclusao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Excluir</span></li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal exclusao-->
+                <div class="modal fade" id="modalExclusao{{$postagem->id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel2">Tem certeza que quer excluir o post?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-target="#modalOpcoes{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal"> Não </button>
+
+                                <button type="button" class="btn btn-danger">
+                                    <a href="excluir/{{$postagem->id}}">Sim</a>
+                                </button>
                             </div>
                         </div>
                     </div>
