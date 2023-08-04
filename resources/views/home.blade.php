@@ -62,14 +62,20 @@
 
       <div class="sidebarOption">
         <span class="material-icons"> perm_identity </span>
-        <h2>Profile</h2>
+        <h2><a href="/user/profile">Profile</a></h2>
       </div>
 
+      @auth
       <div class="sidebarOption">
-        <span class="material-icons"> more_horiz </span>
-        <h2>More</h2>
+        <span class="material-icons"> perm_identity </span>
+        <form action="/logout" method="post">
+            @csrf
+            <h2 onclick="event.preventDefault(); this.closest('form').submit();">
+                <a href="/logout">Sair</a>
+            </h2>
+        </form>
       </div>
-      <button class="sidebar__tweet">Tweet</button>
+      @endauth
     </div>
     <!-- sidebar ends -->
 
@@ -134,8 +140,12 @@
 
                             <div class="modal-body">
                                 <ul class="lista-opcoes" style="padding-left: 0px;">
+                                    @if($postagem->id_autor == Auth::id())
                                     <li><span data-bs-target="#modalEdicao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Editar</span></li>
                                     <li><span data-bs-target="#modalExclusao{{$postagem->id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Excluir</span></li>
+                                    @endif
+                                    <li><span>Denunciar</span></li>
+                                    <li><span data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</span></li>
                                 </ul>
                             </div>
                         </div>

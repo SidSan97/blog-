@@ -18,21 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', [PostController::class, 'pegarPostagem'])->name('home');;
-
-Route::post('/postar', [PostController::class, 'postar']);
-
 Route::delete('/excluir/{id}', [PostController::class, 'excluirPostagem']);
 
 Route::get('/editar/{id}', [PostController::class, 'editarPostagem']);
 
 
+Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+    Route::post('/postar', [PostController::class, 'postar']);
+    Route::get('home', [PostController::class, 'pegarPostagem'])->name('home');;
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
